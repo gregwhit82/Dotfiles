@@ -1,10 +1,14 @@
+
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
 # Import additional configuration files
 #
-# These configuration files will be loaded in order, replacing values in files
-# loaded earlier with those loaded later in the chain. The file itself will
-# always be loaded last.
+# Imports are loaded in order, skipping all missing files, with the importing
+# file being loaded last. If a field is already present in a previous import, it
+# will be replaced.
+#
+# All imports must either be absolute paths starting with `/`, or paths relative
+# to the user's home directory starting with `~/`.
 #import:
 #  - /path/to/alacritty.yml
 
@@ -20,7 +24,7 @@ env:
   # available, otherwise `xterm-256color` is used.
   TERM: xterm-256color
 
-#window:
+window:
   # Window dimensions (changes require restart)
   #
   # Number of lines/columns (not pixels) in the terminal. The number of columns
@@ -34,9 +38,9 @@ env:
   #
   # Specified in number of pixels.
   # If the position is not set, the window manager will handle the placement.
-  #position:
-  #  x: 0
-  #  y: 0
+  position:
+    x: 6
+    y: 6
 
   # Window padding (changes require restart)
   #
@@ -111,15 +115,15 @@ font:
     family: JetBrainsMono Nerd Font Mono
 
     # The `style` can be specified to pick a specific face.
-    #style: Regular
+    style: bold
 
   # Bold font face
-  bold:
+  #bold:
     # Font family
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: monospace
+    #family: monospace
 
     # The `style` can be specified to pick a specific face.
     #style: Bold
@@ -147,7 +151,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  size: 10.0
+  #size: 11.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -176,7 +180,7 @@ font:
 colors:
   # Default colors
   primary:
-    background: '#090B1C'
+    background: '#000319'
     foreground: '#c5c8c6'
 
     # Bright and dim foreground colors
@@ -231,31 +235,31 @@ colors:
     #  foreground: CellBackground
     #  background: CellForeground
 
-    #bar:
-    #  background: '#c5c8c6'
-    #  foreground: '#1d1f21'
+    bar:
+      background: '#c5c8c6'
+      foreground: '#1d1f21'
 
   # Normal colors
-  #normal:
-  #  black:   '#1d1f21'
-  #  red:     '#cc6666'
-  #  green:   '#b5bd68'
-  #  yellow:  '#f0c674'
-  #  blue:    '#81a2be'
-  #  magenta: '#b294bb'
-  #  cyan:    '#8abeb7'
-  #  white:   '#c5c8c6'
+  normal:
+    black:   '#1d1f21'
+    red:     '#cc6666'
+    green:   '#b5bd68'
+    yellow:  '#f0c674'
+    blue:    '#81a2be'
+    magenta: '#b294bb'
+    cyan:    '#8abeb7'
+    white:   '#c5c8c6'
 
   # Bright colors
-  #bright:
-  #  black:   '#666666'
-  #  red:     '#d54e53'
-  #  green:   '#b9ca4a'
-  #  yellow:  '#e7c547'
-  #  blue:    '#7aa6da'
-  #  magenta: '#c397d8'
-  #  cyan:    '#70c0b1'
-  #  white:   '#eaeaea'
+  bright:
+    black:   '#666666'
+    red:     '#d54e53'
+    green:   '#b9ca4a'
+    yellow:  '#e7c547'
+    blue:    '#7aa6da'
+    magenta: '#c397d8'
+    cyan:    '#70c0b1'
+    white:   '#eaeaea'
 
   # Dim colors
   #
@@ -326,7 +330,7 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-  background_opacity: 0.90
+background_opacity: 0.95
 
 #selection:
   # This string contains all characters that are used as separators for
@@ -334,16 +338,27 @@ colors:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
 
   # When set to `true`, selected text will be copied to the primary clipboard.
-  save_to_clipboard: true
+  #save_to_clipboard: false
 
 #cursor:
   # Cursor style
-  #
-  # Values for `style`:
-  #   - ▇ Block
-  #   - _ Underline
-  #   - | Beam
-  #style: Block
+  #style:
+    # Cursor shape
+    #
+    # Values for `shape`:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    #shape: Block
+
+    # Cursor blinking state
+    #
+    # Values for `blinking`:
+    #   - Never: Prevent the cursor from ever blinking
+    #   - Off: Disable blinking by default
+    #   - On: Enable blinking by default
+    #   - Always: Force the cursor to always blink
+    #blinking: Off
 
   # Vi mode cursor style
   #
@@ -352,6 +367,9 @@ colors:
   #
   # See `cursor.style` for available options.
   #vi_mode_style: None
+
+  # Cursor blinking interval in milliseconds.
+  #blink_interval: 750
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
@@ -404,8 +422,8 @@ colors:
   # The `double_click` and `triple_click` settings control the time
   # alacritty should wait for accepting multiple clicks as one double
   # or triple click.
-  double_click: { threshold: 300 }
-  triple_click: { threshold: 300 }
+  #double_click: { threshold: 300 }
+  #triple_click: { threshold: 300 }
 
   # If this is `true`, the cursor is temporarily hidden when typing.
   #hide_when_typing: false
