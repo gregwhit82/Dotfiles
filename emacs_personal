@@ -1,0 +1,109 @@
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+(package-initialize)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#2d3743" "#ff4242" "#74af68" "#dbdb95" "#34cae2" "#008b8b" "#00ede1" "#e1e1e0"])
+ '(custom-enabled-themes (quote (doom-henna)))
+ '(custom-safe-themes
+   (quote
+    ("fd22c8c803f2dac71db953b93df6560b6b058cb931ac12f688def67f08c10640" "8f5a7a9a3c510ef9cbb88e600c0b4c53cdcdb502cfe3eb50040b7e13c6f4e78e" "79586dc4eb374231af28bbc36ba0880ed8e270249b07f814b0e6555bdcb71fab" default)))
+ '(display-time-day-and-date t)
+ '(display-time-mode t)
+ '(doom-modeline-lsp t)
+ '(ensime-sem-high-faces
+   (quote
+    ((var :foreground "#9876aa" :underline
+	  (:style wave :color "yellow"))
+     (val :foreground "#9876aa")
+     (varField :slant italic)
+     (valField :foreground "#9876aa" :slant italic)
+     (functionCall :foreground "#a9b7c6")
+     (implicitConversion :underline
+			 (:color "#808080"))
+     (implicitParams :underline
+		     (:color "#808080"))
+     (operator :foreground "#cc7832")
+     (param :foreground "#a9b7c6")
+     (class :foreground "#4e807d")
+     (trait :foreground "#4e807d" :slant italic)
+     (object :foreground "#6897bb" :slant italic)
+     (package :foreground "#cc7832")
+     (deprecated :strike-through "#a9b7c6"))))
+ '(global-display-line-numbers-mode t)
+ '(global-hl-line-mode t)
+ '(global-visual-line-mode t)
+ '(menu-bar-mode nil)
+ '(neo-show-hidden-files t)
+ '(neo-theme (quote icons))
+ '(org-adapt-indentation t)
+ '(org-startup-indented t)
+ '(package-archives
+   (quote
+    (("gnu" . "https://elpa.gnu.org/packages/")
+     ("melpa" . "https://melpa.org/packages/"))))
+ '(package-selected-packages
+   (quote
+    (org-journal tabbar haskell-mode lsp-mode neotree doom-themes darcula-theme doom-modeline evil org)))
+ '(scroll-bar-mode nil)
+ '(tabbar-mode nil nil (tabbar))
+ '(tool-bar-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(setq backup-inhibited t)
+
+
+;; (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+
+
+
+(require 'evil)
+(evil-mode 1)
+
+(require 'doom-modeline)
+(doom-modeline-mode 1)
+
+(add-to-list 'load-path "/some/path/neotree")
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+
+(defun djcb-opacity-modify (&optional dec)
+  "modify the transparency of the emacs frame; if DEC is t,
+    decrease the transparency, otherwise increase it in 10%-steps"
+  (let* ((alpha-or-nil (frame-parameter nil 'alpha)) ; nil before setting
+          (oldalpha (if alpha-or-nil alpha-or-nil 100))
+          (newalpha (if dec (- oldalpha 10) (+ oldalpha 10))))
+    (when (and (>= newalpha frame-alpha-lower-limit) (<= newalpha 100))
+      (modify-frame-parameters nil (list (cons 'alpha newalpha))))))
+
+ ;; C-8 will increase opacity (== decrease transparency)
+ ;; C-9 will decrease opacity (== increase transparency
+ ;; C-0 will returns the state to normal
+(global-set-key (kbd "C-8") '(lambda()(interactive)(djcb-opacity-modify)))
+(global-set-key (kbd "C-9") '(lambda()(interactive)(djcb-opacity-modify t)))
+(global-set-key (kbd "C-0") '(lambda()(interactive)
+                               (modify-frame-parameters nil `((alpha . 100)))))
+
+(require 'package)
+
+(package-initialize)
+
+(global-set-key [M-left] 'tabbar-backward)
+(global-set-key [M-right] 'tabbar-forward)
