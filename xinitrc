@@ -6,6 +6,10 @@ xfce4-power-manager &
 
 sxhkd -c ~/.config/dwm/sxhkd/sxhkdrc &
 
+/usr/lib/polkit-kde-authentication-agent-1 &
+
+pamac-tray &
+
 volumeicon &
 
 compton -b --config ~/.config/dwm/picom.conf &
