@@ -61,13 +61,14 @@ filetype plugin indent on    " required
 "Remap ESC to ii
 :imap ii <Esc>
 
+"Remap leader to space
 let mapleader = "\<Space>"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Powerline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'apprentice',
+      \ 'colorscheme': 'jellybeans',
       \ }
 
 " Always show statusline
@@ -288,5 +289,6 @@ colorscheme gruvbox
 
 highlight Normal ctermbg=none
 highlight NonText ctermbg=none
+highlight LineNr ctermbg=none
 
 
