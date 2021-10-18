@@ -291,4 +291,6 @@ highlight Normal ctermbg=none
 highlight NonText ctermbg=none
 highlight LineNr ctermbg=none
 
-
+"My remaps
+map <leader>fs :w<cr>
+map <leader>nn :noh<cr>
