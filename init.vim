@@ -294,3 +294,4 @@ highlight LineNr ctermbg=none
 "My remaps
 map <leader>fs :w<cr>
 map <leader>nn :noh<cr>
+map <leader>,  :Explore<cr>
