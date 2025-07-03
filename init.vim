@@ -9,9 +9,12 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()		" required, all plugins must appear after this line.
-
+Plugin 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plugin 'junegunn/fzf.vim'
 Plugin 'gmarik/Vundle.vim'							" Vundle
 Plugin 'itchyny/lightline.vim'                      " Lightline statusbar
+Plugin 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plugin 'vifm/vifm.vim'
 Plugin 'vimwiki/vimwiki'                            " Vim wiki
 Plugin 'scrooloose/nerdtree'						" added nerdtree
@@ -68,7 +71,7 @@ let mapleader = "\<Space>"
 " => Powerline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
+            \ 'colorscheme': 'catppuccin',
       \ }
 
 " Always show statusline
@@ -277,21 +280,36 @@ set linebreak
 " Telescope
 
 " Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>ff <cmd>Telescope find_files --hidden=true<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
-
-
-colorscheme gruvbox
 
 
 highlight Normal ctermbg=none
 highlight NonText ctermbg=none
 highlight LineNr ctermbg=none
 
+
+highlight Normal guibg=none
+
 "My remaps
 map <leader>fs :w<cr>
 map <leader>nn :noh<cr>
 map <leader>,  :Explore<cr>
+map <leader>fr :FZF<cr>
+
+" If installed using Homebrew
+set rtp+=/usr/local/opt/fzf
+
+" If installed using Homebrew on Apple Silicon
+set rtp+=/opt/homebrew/opt/fzf
+
+" If you have cloned fzf on ~/.fzf directory
+set rtp+=~/.fzf
+
+augroup MarkdownSettings
+  autocmd!
+  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+augroup END
+
